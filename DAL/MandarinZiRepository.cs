@@ -12,8 +12,8 @@ namespace cmkService.DAL
 {
     public class MandarinZiRepository : IMandarinZiRepository
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
         private static List<MandarinZi> _dictionary = new List<MandarinZi>();
+        private Random rnd = new Random();
         
         public MandarinZiRepository(){
             ApplicationEnvironment env = PlatformServices.Default.Application;
@@ -51,6 +51,11 @@ namespace cmkService.DAL
                 where m.totalStrokes == strokeCount
                 select m;
             return results;
+        }
+
+        public MandarinZi GetRandomWord()
+        {
+            return _dictionary[rnd.Next(_dictionary.Count)];
         }
     }
 }
