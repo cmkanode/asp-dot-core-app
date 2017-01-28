@@ -11,5 +11,6 @@ namespace cmkService.DAL
         IEnumerable<MandarinZi> FindByCharacter(string searchterm);
         IEnumerable<MandarinZi> FindByRadical(string searchterm);
         IEnumerable<MandarinZi> FindByStroke(int strokeCount);
+        MandarinZi GetRandomWord();
     }
 }

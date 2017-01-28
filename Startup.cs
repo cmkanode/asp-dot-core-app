@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using cmkService.Models;
 using cmkService.DAL;
 
 namespace cmkService 
@@ -12,7 +11,6 @@ namespace cmkService
     {
         public Startup(IHostingEnvironment env)
         {
-            //LitePlatform.Initialize(new LitePlatformFull());
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -26,11 +24,8 @@ namespace cmkService
         // This method gets called by the runtime.  Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services){
             // Add framework services
-            services.AddMvc();
-            //        .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+            services.AddCustomizedMvc();
 
-            services.AddSingleton<IContactRepository, ContactRepository>();
-            services.AddSingleton<ITaskRepository, TaskRepository>();
             services.AddSingleton<IMandarinZiRepository, MandarinZiRepository>();
         }
 
@@ -39,6 +34,8 @@ namespace cmkService
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseStaticFiles();
 
             app.UseMvc(routes => {
                 routes.MapRoute(

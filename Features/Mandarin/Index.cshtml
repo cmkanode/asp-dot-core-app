@@ -1,0 +1,25 @@
+@model cmkService.Models.MandarinZi
+@{
+    ViewBag.ItemName = "Mandarin - Random Word";
+}
+
+<div style="margin: auto; width: 400px;">
+    <div style="clear:both; font-size: 72px; text-align: center; ">
+        @Model.character
+    </div>
+    <ul>
+        @foreach (var definition in Model.definitions)
+        {
+            <li>@definition</li>
+        }
+    </ul>
+</div>
+@*
+        public int id { get; set; }
+        public string character { get; set; }
+        public string[] definitions { get; set; }
+        public string radical { get; set; }
+        public int totalStrokes { get; set; }
+        public string alternative { get; set; }
+        public string traditional { get; set; }
+*@
